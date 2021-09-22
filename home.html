@@ -13,9 +13,7 @@
   <body>
     <h1>Amazon</h1>
     <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Active</a>
-        </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="#">Home</a>
         </li>
@@ -40,12 +38,12 @@
         const getItems = async () => {
             let response = await fetch(' https://striveschool-api.herokuapp.com/api/product/',{
             headers: {
-                Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZjAxMzJkNTI2MjAwMTViNmRjOTAiLCJpYXQiOjE2MjkyODY0MTksImV4cCI6MTYzMDQ5NjAxOX0.SB6MWl6iupQ49AbG7VRbb-PEdZhOPg8yrgzrB3zIKJI"
+                Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgxN2M1ZWU3ODE4NzAwMTVjMjY3YTgiLCJpYXQiOjE2MzIzMTQ1OTYsImV4cCI6MTYzMzUyNDE5Nn0.ezfB5TOOmOEQll_AUmYtoISBHkcZ9erdFndFOSmE-vg"
               },
             });
             let data = await response.json()
             itemData=data
-            displayItems(data)
+            displayItems(data);
         }
         window.onload=()=>{
                   getItems()

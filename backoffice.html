@@ -45,6 +45,9 @@
 
 <body>
     <div class="container">
+        <div id="alert"class="alert alert-success d-none" role="alert">
+            A simple success alert—check it out!
+          </div>
         <div class="row">
             <div id ="displayItems" >
                 <div class=" d-flex justify-content-center my-5">
@@ -53,24 +56,24 @@
                         <h3>Place your items for sale</h3>
                         <div class="form-group mt-3">
                           <label for="itemname">Product Name</label>
-                          <input type="text" class="form-control" id="itemname" aria-describedby="emailHelp">
+                          <input type="text" class="form-control" id="itemname" aria-describedby="emailHelp" required>
                          </div>
                         <div class="form-group">
                           <label for="description">Description</label>
-                          <textarea  rows="5" class="form-control" id="description"></textarea>
+                          <textarea  rows="5" class="form-control" id="description" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="brand">Brand</label>
-                            <input type="text" class="form-control" id="brand">
+                            <input type="text" class="form-control" id="brand" required>
                           </div>
                           <div class="form-group">
                             <label for="img">Image </label>
-                            <input type="text" class="form-control" id="img">
+                            <input type="text" class="form-control" id="img" required>
                           </div>
 
                           <div class="form-group">
                             <label for="price">Price</label>
-                            <input type="text" class="form-control" id="price">
+                            <input type="text" class="form-control" id="price" required>
                           </div>
                        
                        
@@ -84,22 +87,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script></body>
 <script>
     const btn = document.getElementById("btn")
+    const alert = document.getElementById('alert')
            btn.addEventListener("click",(e)=>{
                e.preventDefault();
                let formData = getForm();
                addItems(formData);
+               alert.classList.remove()
            });
 
-           const addItems = async (data)=>{
+           const addItems = async (formData)=>{
                try{
-                   let resp = await fetch("https://striveschool-api.herokuapp.com/api/product/",
+                   let resp = await fetch('https://striveschool-api.herokuapp.com/api/product/',
                    {
                        method:"POST",
-                       body: data,
-                       headers:new Headers({
+                      
+                       headers:{
                            "Content-type":"application/json",
-                           Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZjAxMzJkNTI2MjAwMTViNmRjOTAiLCJpYXQiOjE2MjkyODY0MTksImV4cCI6MTYzMDQ5NjAxOX0.SB6MWl6iupQ49AbG7VRbb-PEdZhOPg8yrgzrB3zIKJI"
-                       }),
+                           "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgxN2M1ZWU3ODE4NzAwMTVjMjY3YTgiLCJpYXQiOjE2MzIzMTY5MDgsImV4cCI6MTYzMzUyNjUwOH0.oB5-6rZQwc2k6HHC8P5AjgbqP2iGmX-JX7NTPuzpg0Y" },
                    }
                    )
                    let product = await resp.json()
